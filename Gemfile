@@ -32,6 +32,8 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
+gem 'rails_12factor', group: :production
+
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
