@@ -1,0 +1,7 @@
+<p><%= I18n.t('devise.mailer.email_changed.greeting') %> <%= @email %>!</p>
+
+<% if @resource.try(:unconfirmed_email?) %>
+  <p><%= I18n.t('devise.mailer.email_changed.message') %> <%= @resource.unconfirmed_email %>.</p>
+<% else %>
+  <p><%= I18n.t('devise.mailer.email_changed.subject') %> <%= @resource.email %>.</p>
+<% end %>

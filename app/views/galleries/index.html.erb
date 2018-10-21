@@ -1,0 +1,28 @@
+<div class="container">
+  <% if can? :create, @gallery %>
+    <%= link_to "#{I18n.t('activerecord.attributes.gallery.index.new')}", new_gallery_path, class: 'btn btn-primary', style: "float: right" %>
+  <% end %>
+  <h1 class="display-4 font-italic"><%= I18n.t('activerecord.attributes.gallery.index.title') %></h1>
+  <div class="tz-gallery">
+    <div class="row">
+      <% @galleries.each do |gallery| %>
+        <div class="col-sm-4 col-md-4">
+          <% if can? :destroy, @gallery %>
+            <%= link_to "#{I18n.t('activerecord.attributes.gallery.index.delete')}", gallery, method: :delete, data: {confirm: "#{I18n.t('activerecord.attributes.gallery.index.confirm')}"}, class: "badge badge-pill badge-danger", style: "float: right" %>
+          <% end %>
+          <% if can? :update, @gallery %>
+            <%= link_to "#{I18n.t('activerecord.attributes.gallery.index.edit')}", edit_gallery_path(gallery), class: "badge badge-pill badge-primary", style: "float: right" %>
+            <br>
+          <% end %>
+          <a class="lightbox" href="<%= url_for(gallery.gallery_images.url) %>">
+            <img src="<%= url_for(gallery.gallery_images.url) %>" alt="<%= gallery.name %>">
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>

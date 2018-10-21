@@ -1,0 +1,18 @@
+<%= form_with(model: @article, validate: true, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :title, class: 'text-info' %><br>
+    <%= form.text_field :title, autofocus: true, class: 'form-control', autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :body, class: 'text-info' %><br>
+    <%= tinymce language: "uk_UA" %>
+    <%= form.text_area :body, autocomplete: "off", :rows => 10, class: 'tinymce' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :images, class: 'text-info' %><br>
+    <%= form.file_field :images, autofocus: true, class: 'form-control-file', autocomplete: "off" %>
+  </div>
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

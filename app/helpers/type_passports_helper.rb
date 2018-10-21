@@ -1,0 +1,2 @@
+module TypePassportsHelper
+end

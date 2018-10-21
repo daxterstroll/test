@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= favicon_link_tag '/favicon.ico' %>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "bootstrap.min" %>
+  <%= stylesheet_link_tag "baguetteBox.min" %>
+  <%= javascript_include_tag "application", media: "all" %>
+  <%= csrf_meta_tags %>
+  <% if notice.present? %>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4 class="font-italic text-center"><%= notice %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-primary bg-light">
+  <div class="container">
+    <div class="greyline hidden-xs hidden-sm">
+      <div class="logo">
+        <a href="/"><img src="<%= image_url('logo.png') %>"/></a>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse visible-xs visible-sm offset-lg-2" id="navbarResponsive">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 col-sm-7 col-xl-8">
+            <% if can? :create, @article %>
+              <%= link_to "#{I18n.t('activerecord.attributes.article.index.new')}", new_article_path, class: 'navbar-brand' %>
+            <% end %>
+            <% if user_signed_in? %>
+              <% if current_user.admin %>
+                <%= link_to "#{I18n.t('view.application.admin')}", rails_admin_path, class: 'navbar-brand' %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-lg-5 col-sm-5 col-xl-4">
+            <% if user_signed_in? %>
+              <a class="navbar-brand" href="<%= user_root_path %>"><%= current_user.surname %> <%= current_user.name %></a>
+              <a class="navbar-brand text-right" href="<%= destroy_user_session_path %>"><%= I18n.t('view.application.exit') %></a>
+            <% else %>
+              <a class="navbar-brand" href="<%= new_user_session_path %>"><%= I18n.t('view.application.enter') %></a>
+              <a class="navbar-brand" href="<%= new_user_registration_path %>"><%= I18n.t('view.application.sign_up') %></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-light " style="background-color: #052b83;">
+  <div class="linemy visible-sm visible-xs" role="group" aria-label="...">
+    <a href="<%= root_path %>" class="logoimg"><img src="<%= image_url('gerb_title.png') %>" alt=""/></a>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse navbar-nav" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto offset-lg-2_5">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b><%= I18n.t('view.application.about_university') %></b>
+        </a>
+        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownBlog">
+          <a class="dropdown-item" href="<%= history_path %>"><%= I18n.t('view.application.history') %></a>
+          <a class="dropdown-item" href="<%= recognition_path %>"><%= I18n.t('view.application.recognition') %></a>
+          <a class="dropdown-item" href="<%= direktor_path %>"><%= I18n.t('view.application.direktor') %></a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b><%= I18n.t('view.application.educational_subsidies') %></b>
+        </a>
+        <div class="dropdown-menu dropright">
+          <a class="dropdown-item" href="<%= college_path %>"><%= I18n.t('view.application.college') %></a>
+          <a class="dropdown-item" href="<%= zaochne_viddilennya_path %>"><%= I18n.t('view.application.zaochne_viddilennya') %></a>
+          <a class="dropdown-item dropdown-toggle drop" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= I18n.t('view.application.department') %>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="<%= department_computer_sciences_path %>"><%= I18n.t('view.application.department_computer_sciences') %></a>
+            <a class="dropdown-item" href="<%= department_economy_and_entrepreneurship_path %>"><%= I18n.t('view.application.department_economy_and_entrepreneurship') %></a>
+            <a class="dropdown-item" href="<%= department_management_and_social_humanitarian_path %>"><%= I18n.t('view.application.department_management_and_social_humanitarian') %></a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= class_schedules_path %>"><b><%= I18n.t('view.application.class_schedules') %></b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= contacts_path %>"><b><%= I18n.t('view.application.contacts') %></b></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<header>
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner " role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item h-25 active" style="background-image: url('<%= image_url('1.jpg') %>')">
+      </div>
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item h-25" style="background-image: url('<%= image_url('2.jpg') %>')">
+      </div>
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item h-25" style="background-image: url('<%= image_url('3.jpg') %>')">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only"><%= I18n.t('view.application.previous') %></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only"><%= I18n.t('view.application.next') %></span>
+    </a>
+  </div>
+</header>
+<div class="container bigbuttons_container">
+  <div class="row bigbuttons">
+    <div class="col-sm-3">
+      <a href="<%= prijmalna_komisija_path %>"><%= I18n.t('view.application.prijmalna_komisija') %></a>
+    </div>
+    <div class="col-sm-3">
+      <a href="<%= studentu_path %>"><%= I18n.t('view.application.studentu') %></a>
+    </div>
+    <div class="col-sm-3">
+      <a href="<%= department_path %>"><%= I18n.t('view.application.department') %></a>
+    </div>
+    <div class="col-sm-3">
+      <a href="<%= galleries_path %>"><%= I18n.t('view.application.galleries') %></a>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <%= yield %>
+</div>
+<br>
+<footer class="py-5 navbar-expand-md navbar-dark navbar-light" style="background-color: #052b83;">
+  <div class="container">
+    <p class="m-0 text-left text-white"><%= I18n.t('view.application.text') %></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<%= form_for(resource, as: resource_name, validate: true, url: registration_path(resource_name)) do |f| %>
+  <div id="login">
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-7">
+          <div class="jumbotron">
+            <div class="login-box col-md-12">
+              <% if devise_error_messages!.present? %>
+                <div class="alert alert-danger">
+                  <%= devise_error_messages! %>
+                </div>
+              <% end %>
+              <form id="login-form" class="form" action="" method="post">
+                <h3 class="text-center text-info"><%= I18n.t('devise.registrations.new.title') %></h3>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col">
+                      <label for="surname" class="text-info"><%= I18n.t('devise.registrations.new.surname') %> </label><br>
+                      <%= f.text_field :surname, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="col">
+                      <label for="name" class="text-info"><%= I18n.t('devise.registrations.new.name') %></label><br>
+                      <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="col">
+                      <label for="middle_name" class="text-info"><%= I18n.t('devise.registrations.new.middle_name') %></label><br>
+                      <%= f.text_field :middle_name, autofocus: true, class: 'form-control' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="text-info"><%= I18n.t('devise.registrations.new.email') %></label><br>
+                  <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+                </div>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="password" class="text-info"><%= I18n.t('devise.registrations.new.password') %></label><br>
+                    <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+                  </div>
+                  <div class="col">
+                    <label for="password_confirmation" class="text-info"><%= I18n.t('devise.registrations.new.true_password') %></label><br>
+                    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="sex" class="text-info"><%= I18n.t('devise.registrations.new.sex') %></label><br>
+                    <%= f.collection_select :sex_id, Sex.order(:name), :id, :name, {prompt: '', autofocus: true}, {class: "form-control"} %>
+                  </div>
+                  <div class="col">
+                    <label for="birthday" class="text-info"><%= I18n.t('devise.registrations.new.birthday') %></label><br>
+                    <%= f.text_field :birthday, autofocus: true, type: "date", class: "form-control" %>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="phone" class="text-info"><%= I18n.t('devise.registrations.new.phone') %></label><br>
+                    <%= f.number_field :phone, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="col">
+                    <label for="identification_number" class="text-info"><%= I18n.t('devise.registrations.new.identification_number') %></label><br>
+                    <%= f.number_field :identification_number, autofocus: true, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="address" class="text-info"><%= I18n.t('devise.registrations.new.address') %></label><br>
+                  <%= f.text_field :address, autofocus: true, class: 'form-control' %>
+                </div>
+                <div class="form-group row">
+                  <div class="col-4">
+                    <label for="traning" class="text-info"><%= I18n.t('devise.registrations.new.traning') %></label><br>
+                    <%= f.collection_select :traning_id, Traning.order(:name), :id, :name, {prompt: '', autofocus: true}, {class: "form-control"} %>
+                  </div>
+                  <div class="col-2">
+                    <label for="specialty" class="text-info">Курс</label><br>
+                    <%= f.select :kurs, %w[I II III IV], {prompt: '', autofocus: true}, {class: "form-control"} %>
+                  </div>
+                  <div class="col-6">
+                    <label for="specialty" class="text-info"><%= I18n.t('devise.registrations.new.specialty') %></label><br>
+                    <%= f.collection_select :specialty_id, Specialty.arrange_as_array, :id, :name_for_selects, {prompt: '', autofocus: true}, {class: "form-control"} %>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <%= f.fields_for :passports, @user.passports.build do |passports| %>
+                    <div class="col-4">
+                      <label for="type_passport" class="text-info"><%= I18n.t('devise.registrations.new.type_passport') %></label><br>
+                      <%= passports.collection_select :type_passport_id, TypePassport.order(:name), :id, :name, {prompt: ''}, {class: "form-control"} %>
+                    </div>
+                    <div class="col-8">
+                      <label for="number" class="text-info"><%= I18n.t('devise.registrations.new.passport_number') %></label><br>
+                      <%= passports.text_field :number, autofocus: true, class: 'form-control' %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="form-group row">
+                  <%= f.fields_for :certificates, @user.certificates.build do |certificates| %>
+                    <div class="col">
+                      <label for="type_certificate" class="text-info"><%= I18n.t('devise.registrations.new.type_certificate') %></label><br>
+                      <%= certificates.collection_select :type_certificate_id, TypeCertificate.order(:name), :id, :name, {prompt: '', autofocus: true}, {class: "form-control"} %>
+                    </div>
+                    <div class="col">
+                      <label for="number" class="text-info"><%= I18n.t('devise.registrations.new.certificate_number') %></label><br>
+                      <%= certificates.text_field :number, autofocus: true, class: 'form-control' %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="form-group">
+                  <br>
+                  <div class="row">
+                    <div class="col">
+                      <%= f.submit "#{I18n.t('devise.registrations.new.sign_up')}", class: 'btn btn-primary' %>
+                    </div>
+                    <div class="col">
+                      <div id="register-link" class="text-right">
+                        <%= render "devise/shared/links" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

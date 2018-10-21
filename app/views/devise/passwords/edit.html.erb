@@ -1,0 +1,45 @@
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <div id="error_explanation">
+    <%= devise_error_messages! %>
+  </div>
+  <%= f.hidden_field :reset_password_token %>
+  <div id="login">
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-7">
+          <div class="jumbotron">
+            <div class="login-box col-md-12">
+              <form id="login-form" class="form" action="" method="post">
+                <h3 class="text-center text-info"><%= I18n.t('devise.passwords.edit.change_your_password') %></h3>
+                <div class="form-group">
+                  <label for="password" class="text-info"><%= I18n.t('devise.passwords.edit.new_password') %>:</label><br>
+                  <%= f.password_field :password , autofocus: true, autocomplete: "off", class: 'form-control' %>
+                  <em>(<%= @minimum_password_length %> <%= I18n.t('devise.passwords.edit.characters_minimum') %>)</em>
+                </div>
+
+                <div class="form-group">
+                  <label for="address" class="text-info"><%= I18n.t('devise.passwords.edit.confirm_new_password') %>:</label><br>
+                  <%= f.password_field :password_confirmation , autocomplete: "off", class: 'form-control' %>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="form-group">
+                        <%= f.submit "#{I18n.t('devise.passwords.edit.change_my_password')}", class: 'btn btn-primary'%>
+                      </div>
+                    </div>
+                    <div class="col-7 text-right">
+                      <%= render "devise/shared/links" %>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

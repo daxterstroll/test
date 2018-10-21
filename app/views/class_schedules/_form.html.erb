@@ -1,0 +1,31 @@
+<%= form_with(model: class_schedule, local: true) do |form| %>
+  <%= form.label :course, class: 'text-info' %><br>
+  <div class="row">
+    <div class="col-4">
+      <p class="text-info text-center"><%= I18n.t('activerecord.attributes.class_schedule.index.business_college') %></p>
+      <%= hidden_field_tag "class_schedule[course_ids][]", nil %>
+      <% Course.all.each do |course| %>
+        <%= check_box_tag "class_schedule[course_ids][]", course.id, @class_schedule.course_ids.include?(course.id), id: dom_id(course) %><%= label_tag dom_id(course), course.name %>
+        <% if course.id == 4 or course.id == 8 or course.id == 12 or course.id == 19 or course.id == 23 or course.id == 28 or course.id == 37 or course.id == 39 or course.id == 42 %>
+      <br>
+        <% elsif course.id == 15 %>
+    </div>
+    <div class="col-5">
+      <p class="text-info text-center"><%= I18n.t('activerecord.attributes.class_schedule.index.bachelor') %></p>
+        <% elsif course.id == 34 %>
+    </div>
+    <div class="col-3">
+      <p class="text-info text-center"><%= I18n.t('activerecord.attributes.class_schedule.index.master') %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :attachment, class: 'text-info' %><br>
+    <%= form.file_field :attachment, class: 'form-control-file', autocomplete: "off" %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

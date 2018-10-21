@@ -1,0 +1,46 @@
+<% if can? :create, @class_schedule %>
+  <%= link_to "#{I18n.t('activerecord.attributes.class_schedule.index.new')}", new_class_schedule_path, class: 'btn btn-primary', style: "float: right" %>
+<% end %>
+<h1 class="display-4 font-italic text-center">Розклад занять на <%= Time.now.year %> - <%= Time.now.year+1 %> навчальний рік</h1>
+<p class="text-danger"><%= I18n.t('activerecord.attributes.class_schedule.index.text') %></p>
+
+<% @courses.where(id: 1..44).each do |f| %>
+  <% if f.id == 1 or f.id == 16 or f.id == 35 %>
+<table class="table" style="text-align: center">
+  <tr>
+    <% if f.id == 1 %>
+    <th colspan="4">
+      <% elsif f.id == 16 %>
+    <th colspan="6">
+      <% elsif f.id == 35%>
+    <th colspan="5">
+      <% end %>
+      <%= I18n.t('activerecord.attributes.class_schedule.index.business_college') if f.id == 1 %><%= I18n.t('activerecord.attributes.class_schedule.index.bachelor') if f.id == 16 %><%= I18n.t('activerecord.attributes.class_schedule.index.master') if f.id == 35 %>
+    </th>
+  </tr>
+  <tr>
+  <% end %>
+  <% if f.id == 16 or f.id == 17 or f.id == 20 or f.id == 21 or f.id == 26 %>
+    <td colspan="2">
+  <% else %>
+    <td>
+  <% end %>
+  <% if f.class_schedules.last.present? %>
+      <%= link_to "#{f.name}", f.class_schedules.last.attachment_url %>
+      <span style='color:#999999; font-size:9pt; font-weight:normal;'>
+        [<%= f.class_schedules.last.created_at.strftime("%d.%m.%Y %H:%M:%S") %>]
+      </span>
+    <% end %>
+    </td>
+  <% if f.id == 4 or f.id == 8 or f.id == 12 or f.id == 19 or f.id == 23 or f.id == 28 or f.id == 39 %>
+   </tr>
+   <tr>
+     <% if f.id == 12 %>
+    <td>
+    </td>
+     <% end %>
+  <% elsif f.id == 15 or f.id == 34 or f.id == 44 %>
+  </tr>
+</table>
+  <% end %>
+<% end %>

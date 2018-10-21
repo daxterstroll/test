@@ -1,0 +1,73 @@
+uk:
+  activerecord:
+    successful:
+      messages:
+        created: "%{model} була успішно створена."
+        updated: "%{model} була успішно оновлена."
+    models:
+      class_schedule: 'розклад занять'
+      article: 'статті'
+      gallery: 'фото'
+      course: 'групи'
+      user: "Користувач"
+      passport: "Паспорт"
+      type_passport: "Тип паспорта"
+      type_certificate: "Тип нач.документа"
+      traning: "Форма навчання"
+      sex: "Cтать"
+      certificate: "Нач. документи"
+      specialty: "Спеціальність"
+    attributes:
+      class_schedule:
+        course: 'Група:'
+        attachment: 'Розклад:'
+        index:
+          new: 'Додати новий розклад'
+          text: 'Увага! Розклад занять може змінюватись, звіряйте, будь ласка, з розкладом опублікованим на факультетах.'
+          business_college: 'Бизнес колледж'
+          bachelor: 'Бакалавр'
+          master: 'Магістр'
+        new:
+          title: 'Додати новий розклад'
+      gallery:
+        name: 'Назва фото'
+        gallery_images: 'Фото'
+        form:
+          error: 'Виправте помилки, які забороняють зберегти цю фотокартку'
+        edit:
+          title: 'Редагування фотокартки'
+        index:
+          new: 'Додати фото'
+          title: 'Життя філії'
+          edit: 'Редагувати'
+          delete: 'Видалити'
+          confirm: 'Ти впевнений?'
+        new:
+          title: 'Додати фото'
+      article:
+        title: 'Назва:'
+        body: 'Зміст:'
+        images: 'Фото статті:'
+        edit:
+          title: 'Редагування статті'
+        index:
+          new: 'Додати статтю'
+          edit: 'Ред.'
+          delete: 'Вид.'
+          next: 'Далі'
+          confirm: 'Ти впевнений?'
+        new:
+          new_article: 'Нова стаття'
+        show:
+          date: 'Опубликовано'
+          edit: 'Редагувати'
+          delete: 'Видалити'
+          confirm: 'Ти впевнений?'
+          other: 'Інші події'
+    errors:
+      messages:
+        blank: 'не може бути порожнім'
+        record_invalid: 'Виникли помилки: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Неможливо видалити запис, так як існує залежність: %{record}'
+          has_many: 'Неможливо видалити запис, так як існують залежності: %{record}'

@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  username: postgres
+  password: 110197
+
+development:
+  <<: *default
+  database: students_development
+
+test:
+  <<: *default
+  database: students_test
+
+production:
+  <<: *default
+  database: students_production

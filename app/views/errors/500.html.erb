@@ -1,0 +1,16 @@
+<div class="notfound">
+  <%= image_tag 'Oops.png', style: 'width: 40%;' %>
+  <h2>500 - Ми вибачаємося, але щось пішло не так.</h2>
+  <% if class_schedules_path && user_signed_in? && current_user.student == false %>
+    <p>Ваш обліковий запис не підтверджен як обліковий запис студента</p>
+  <% elsif class_schedules_path && user_signed_in? == false %>
+    <p>Щоб отримати доступ до
+      розкладу, <%= link_to 'войдіть в систему', new_user_session_path, class: "btn btn-primary" %>,
+      або <%= link_to 'зареєструйтеся', new_user_registration_path, class: "btn btn-primary" %> і підтвердіть що ви
+      студент університету.</p>
+  <% else %>
+    <p>Можливо, ви намагалися подивитись те, до чого ви не маєте доступу.</p>
+  <% end %>
+  <%= link_to 'Головна', :root %>
+  <%= link_to 'Назад', :back %>
+</div>

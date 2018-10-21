@@ -1,0 +1,111 @@
+<div id="login">
+  <div class="container">
+    <div id="login-row" class="row justify-content-center align-items-center">
+      <div id="login-column" class="col-md">
+        <div class="jumbotron">
+          <div class="form-group">
+            <div class="row">
+              <div class="col offset-lg-4">
+                <h3 class="text-center text-info"><%= I18n.t('persons.profile.title') %></h3>
+              </div>
+              <div class="col">
+                <div id="register-link" class="text-right">
+                  <a class="btn btn-primary" href="<%= edit_user_registration_path %>" role="button"><%= I18n.t('persons.profile.edit') %></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="login-box col-md-12">
+            <form id="login-form" class="form" action="" method="post">
+              <div class="form-group">
+                <br>
+                <div class="row">
+                  <div class="col">
+                    <% if current_user.surname.present? || current_user.name.present? || current_user.middle_name.present? %>
+                      <div class="form-group">
+                        <label for="name" class="text-info"><%= I18n.t('persons.profile.nsm') %>:</label>
+                        <%= current_user.surname %> <%= current_user.name %> <%= current_user.middle_name %>
+                      </div>
+                    <% end %>
+                    <% if current_user.sex.present? %>
+                      <div class="form-group">
+                        <label for="sex" class="text-info"><%= I18n.t('persons.profile.sex') %>:</label>
+                        <%= current_user.sex.name %>
+                      </div>
+                    <% end %>
+                    <% if current_user.birthday.present? %>
+                      <div class="form-group">
+                        <label for="birthday" class="text-info"><%= I18n.t('persons.profile.birthday') %>:</label>
+                        <%= current_user.birthday %>
+                      </div>
+                    <% end %>
+                    <% if current_user.email.present? %>
+                      <div class="form-group">
+                        <label for="email" class="text-info"><%= I18n.t('persons.profile.email') %>:</label>
+                        <%= current_user.email %>
+                      </div>
+                    <% end %>
+                    <% if current_user.phone.present? %>
+                      <div class="form-group">
+                        <label for="phone" class="text-info"><%= I18n.t('persons.profile.phone') %>:</label>
+                        <%= current_user.phone %>
+                      </div>
+                    <% end %>
+                    <% if current_user.passports.present? || current_user.type_passports.present? %>
+                      <div class="form-group">
+                        <label for="passports" class="text-info"><%= I18n.t('persons.profile.passport') %>:</label>
+                        <%= current_user.type_passports.first.name %> | <%= current_user.passports.first.number %>
+                      </div>
+                    <% end %>
+                    <% if current_user.address.present? %>
+                      <div class="form-group">
+                        <label for="address" class="text-info"><%= I18n.t('persons.profile.address') %>:</label>
+                        <%= current_user.address %>
+                      </div>
+                    <% end %>
+                    <% if current_user.identification_number.present? %>
+                      <div class="form-group">
+                        <label for="identification_number" class="text-info"><%= I18n.t('persons.profile.indefication_number') %>
+                          :</label>
+                        <%= current_user.identification_number %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col">
+                    <% if current_user.course.present? %>
+                      <div class="form-group">
+                        <label for="course" class="text-info"><%= I18n.t('persons.profile.group') %>:</label>
+                        <%= current_user.course.name %>
+                      </div>
+                    <% end %>
+                    <% if current_user.specialty.present? %>
+                      <% if current_user.specialty.ancestry.present? %>
+                        <div class="form-group">
+                          <label for="specialty" class="text-info"><%= I18n.t('persons.profile.specialty') %>:</label>
+                          <%= Specialty.find(current_user.specialty.ancestry).name %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                    <% if current_user.specialty.present? %>
+                      <div class="form-group">
+                        <label for="specialty" class="text-info"><%= I18n.t('persons.profile.specialty2') %>:</label>
+                        <%= current_user.specialty.name %>
+                      </div>
+                    <% end %>
+                    <% if current_user.type_certificates.present? || current_user.certificates.present? %>
+                      <div class="form-group">
+                        <label for="certificates" class="text-info"><%= I18n.t('persons.profile.certificate') %>
+                          :</label>
+                        <%= current_user.type_certificates.first.name %> | <%= current_user.certificates.first.number %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

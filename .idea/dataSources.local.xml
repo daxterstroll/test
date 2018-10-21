@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails students: development" uuid="de3a0a62-a359-45e0-abe8-91da27e4606d">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
+      <first-sync>true</first-sync>
+      <user-name>postgres</user-name>
+    </data-source>
+    <data-source name="Rails students: test" uuid="05bf9d47-1bce-4190-a177-960f8c8b99ba">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
+      <user-name>postgres</user-name>
+    </data-source>
+    <data-source name="Rails students: production" uuid="a72301e8-3b9f-4c9f-bf81-52c94c0fe8ca">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
+      <user-name>postgres</user-name>
+    </data-source>
+  </component>
+</project>

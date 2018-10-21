@@ -1,0 +1,63 @@
+<h1 class="display-4 font-italic"><%= @article.title %></h1>
+<div class="row">
+  <div class="col-sm-12 col-lg-8">
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+          <p><%= controller.localize @article.created_at, :format => "#{I18n.t('activerecord.attributes.article.show.date')} %d %B, %Y в %H:%M" %></p>
+        </div>
+        <div class="col-4">
+          <% if can? :update, @article %>
+            <%= link_to "#{I18n.t('activerecord.attributes.article.show.edit')}", edit_article_path(@article), class: "btn btn-sm btn-outline-info" %>
+          <% end %>
+          <% if can? :destroy, @article %>
+            <%= link_to "#{I18n.t('activerecord.attributes.article.show.delete')}", @article, method: :delete, class: "btn btn-sm btn-outline-danger", data: {confirm: "#{I18n.t('activerecord.attributes.article.show.confirm')}"} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="tz-gallery">
+        <% if @article.images.present? %>
+          <div class="col-md-6">
+            <a class="lightbox" href="<%= url_for(@article.images.url) %>">
+              <img src="<%= url_for(@article.images.url) %>" alt="<%= @article.title %>" class="img_left">
+            </a>
+          </div>
+        <% end %>
+        <%= @article.body.html_safe %>
+      </div>
+    </div>
+  </div>
+  <div class="hidden-xs hidden-sm col-4">
+    <h5 class="card-header"><%= I18n.t('activerecord.attributes.article.show.other') %></h5>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="list-unstyled">
+            <div class="right-main">
+              <div class="news-right">
+                <ul class="list-unstyled">
+                  <% @articles.order(:created_at).limit(10).each do |article| %>
+                    <li>
+                      <div class="date"><%= article.created_at.strftime("%d.%m") %></div>
+                      <div class="title">
+                        <%= link_to "#{article.title}", article %>
+                      </div>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+

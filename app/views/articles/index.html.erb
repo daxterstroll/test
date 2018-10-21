@@ -1,0 +1,33 @@
+<div class="row">
+  <% @articles.each do |article| %>
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header" style="font-size: 14px;"><%= article.title %></h6>
+        <div class="card-body">
+          <% if article.images? %>
+            <div class="crop"><%= image_tag article.images.url, class: "crop img" %></div>
+          <% end %>
+          <p class="card-text"><%= truncate(article.body, length: 230, escape: false) %></p>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-5">
+              <div class="card-subtitle mb-2 text-muted" style="margin-top: 4%; "><%= article.created_at.strftime("%d.%m.%Y") %></div>
+            </div>
+            <div class="col-7">
+              <div id="register-link" class="text-right" >
+                <% if can? :update, @article %>
+                  <%= link_to "#{I18n.t('activerecord.attributes.article.index.edit')}", edit_article_path(article), class: "btn btn-primary btn-sm" %>
+                <% end %>
+                <% if can? :destroy, @article %>
+                  <%= link_to "#{I18n.t('activerecord.attributes.article.index.delete')}", article, method: :delete, data: { confirm: "#{I18n.t('activerecord.attributes.article.index.confirm')}" }, class: "btn btn-danger btn-sm" %>
+                <% end %>
+                <%= link_to  "#{I18n.t('activerecord.attributes.article.index.next')}", article, class: "btn btn-primary btn-sm"%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

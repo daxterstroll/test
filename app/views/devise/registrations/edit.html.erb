@@ -1,0 +1,70 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+  <div id="login">
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-7">
+          <div class="jumbotron">
+            <div class="login-box col-md-12">
+              <% if devise_error_messages!.present? %>
+                <div class="alert alert-danger">
+                  <%= devise_error_messages! %>
+                </div>
+              <% end %>
+              <form id="login-form" class="form" action="" method="post">
+                <h3 class="text-center text-info"><%= I18n.t('devise.registrations.edit.title') %></h3>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="password" class="text-info"><%= I18n.t('devise.registrations.new.new_password') %></label><br>
+                    <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+                    <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> <%= I18n.t('devise.registrations.new.password_text') %>)</em>
+                    <% end %>
+                  </div>
+                  <div class="col">
+                    <label for="password_confirmation" class="text-info"><%= I18n.t('devise.registrations.new.new_true_password') %></label><br>
+                    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="address" class="text-info"><%= I18n.t('devise.registrations.new.address') %></label><br>
+                  <%= f.text_field :address, autofocus: true, class: 'form-control' %>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-4">
+                    <label for="traning" class="text-info"><%= I18n.t('devise.registrations.new.traning') %></label><br>
+                    <%= f.collection_select :traning_id, Traning.order(:name), :id, :name, {prompt: '', autofocus: true}, {class: "form-control"} %>
+                  </div>
+                  <div class="col-8">
+                    <label for="specialty" class="text-info"><%= I18n.t('devise.registrations.new.specialty') %></label><br>
+                    <%= f.collection_select :specialty_id, Specialty.arrange_as_array, :id, :name_for_selects, {prompt: '', autofocus: true}, {class: "form-control"} %>
+                    <%= f.select :kurs, %w[I II III IV], {prompt: '', autofocus: true}, {class: "form-control"} %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phone" class="text-info"><%= I18n.t('devise.registrations.new.phone') %></label><br>
+                  <%= f.number_field :phone, autofocus: true, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <br>
+                  <div class="row">
+                    <div class="col-10">
+                      <div class="form-group">
+                        <label for="password" class="text-info"><%= I18n.t('devise.registrations.new.true_password') %></label>
+                        <%= f.password_field :current_password, autofocus: true, class: 'form-control', autocomplete: "off" %>
+                        <em>(нам потрібен ваш поточний пароль, щоб підтвердити зміни)</em>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <%= f.submit "Оновити", class: 'btn btn-primary', style: 'margin-top: 49%' %>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
