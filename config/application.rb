@@ -8,6 +8,7 @@ module Students
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     config.serve_static_assets = true
+    config.assets.initialize_on_precompile = false
     config.i18n.default_locale = :uk
     config.time_zone = 'Kyiv'
     config.exceptions_app = self.routes
